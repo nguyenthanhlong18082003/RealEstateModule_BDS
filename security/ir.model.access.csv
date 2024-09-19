@@ -1,0 +1,62 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+access_res_cart,access_res_cart,model_res_cart,RealEstateModule_BDS.access_res_module_user,1,1,1,1
+
+
+access_team_partner_details,access_team_partner_details,model_res_partner,RealEstateModule_BDS.access_res_module_user,1,1,1,1
+
+
+access_res_customer,access_res_customer,model_res_customer,RealEstateModule_BDS.access_res_module_user,1,1,1,1
+
+access_res_agency,access_res_agency,model_res_agency,RealEstateModule_BDS.access_res_module_user,1,1,1,1
+
+access_custom_friend_partner,access_custom_friend_partner,model_custom_friend_partner,RealEstateModule_BDS.access_res_module_user,1,1,1,1
+
+access_custom_partner,access_custom_partner,model_custom_partner,RealEstateModule_BDS.access_res_module_user,1,1,1,1
+
+access_custom_team,access_custom_team,model_custom_team,RealEstateModule_BDS.access_res_module_user,1,1,1,1
+
+access_sent_friend_request,access_sent_friend_request,model_sent_friend_request,RealEstateModule_BDS.access_res_module_user,1,1,1,1
+
+access_sent_partner_request,access_sent_partner_request,model_sent_partner_request,RealEstateModule_BDS.access_res_module_user,1,1,1,1
+
+access_sent_team_request,access_sent_team_request,model_sent_team_request,RealEstateModule_BDS.access_res_module_user,1,1,1,1
+
+access_friend_request,access_friend_request,model_friend_request,RealEstateModule_BDS.access_res_module_user,1,1,1,1
+
+access_partner_request,access_partner_request,model_partner_request,RealEstateModule_BDS.access_res_module_user,1,1,1,1
+
+access_team_request,access_team_request,model_team_request,RealEstateModule_BDS.access_res_module_user,1,1,1,1
+
+
+access_product,access_product,model_product_template,RealEstateModule_BDS.access_res_module_user,1,1,1,1
+
+access_friend_request,access_friend_request,model_friend_request,RealEstateModule_BDS.access_res_module_user,1,1,1,1
+
+access_product,access_product_description_block,WebsiteTemplate_BDS.model_product_table_block_description,RealEstateModule_BDS.access_res_module_user,1,1,1,1
+
+
+access_product,access_product_description_block_image,WebsiteTemplate_BDS.model_product_table_block_image_model,RealEstateModule_BDS.access_res_module_user,1,1,1,1
+
+
+access_product_direction,access_product_direction,model_product_direction,base.group_user,1,1,1,1
+
+access_product_type,access_product_type,model_product_type,base.group_user,1,1,1,1
+
+access_res_country_district_user,res.country.district user,model_res_country_district,base.group_user,1,1,1,1
+access_res_country_district_manager,res.country.district manager,model_res_country_district,base.group_system,1,1,1,1
+
+access_res_country_ward_user,res.country.ward user,model_res_country_ward,base.group_user,1,1,1,1
+access_res_country_ward_manager,res.country.ward manager,model_res_country_ward,base.group_system,1,1,1,1
+
+access_res_brokerage1,res.brokerage1 user,model_res_brokerage1,base.group_user,1,1,1,1
+access_res_brokerage1,res.brokerage1 manager,model_res_brokerage1,base.group_system,1,1,1,1
+
+access_res_brokerage2,res.brokerage2 user,model_res_brokerage2,base.group_user,1,1,1,1
+access_res_brokerage2,res.brokerage2 manager,model_res_brokerage2,base.group_system,1,1,1,1
+
+access_res_brokerage3,res.brokerage3 user,model_res_brokerage3,base.group_user,1,1,1,1
+access_res_brokerage3,res.brokerage3 manager,model_res_brokerage3,base.group_system,1,1,1,1
+
+access_res_brokerage4,res.brokerage4 user,model_res_brokerage4,base.group_user,1,1,1,1
+access_res_brokerage4,res.brokerage4 manager,model_res_brokerage4,base.group_system,1,1,1,1

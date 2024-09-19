@@ -1,0 +1,7 @@
+<odoo>
+    <record id="district_1" model="res.country.district">
+        <field name="name">District 1</field>
+        <field name="state_id" ref="base.VN-SG"/>
+    </record>
+    <!-- Thêm các quận/huyện khác tương tự -->
+</odoo>

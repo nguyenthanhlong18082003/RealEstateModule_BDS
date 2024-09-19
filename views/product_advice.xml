@@ -1,0 +1,441 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.actions.server" id="dup_product">
+            <field name="name">Res Partner Server Action</field>
+            <field name="model_id" ref="model_product_template" />
+            <field name="state">code</field>
+            <field name="code">
+                if record:
+                new_product = env['product.template'].duplicate_product(record.id)
+                action = {
+                    "type": "ir.actions.act_window",
+                    "view_mode": "form",
+                    "res_model": record._name,
+                    "res_id": new_product.id,
+                }
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="view_product_template_inherit_real_estate_type">
+            <field name="name">product.template.form.inherit</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view" />
+            <field name="priority">16</field>
+            <field name="arch" type="xml">
+                <!-- <xpath expr="//button[@name='action_update_quantity_on_hand']"
+                position="attributes">
+                    <attribute name="invisible">(is_owner)</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_view_sales']" position="attributes">
+                    <attribute name="invisible">(is_owner)</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_view_orderpoints']" position="attributes">
+                    <attribute name="invisible">(is_owner)</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_view_stock_move_lines']" position="attributes">
+                    <attribute name="invisible">(is_owner)</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_product_tmpl_forecast_report']" position="attributes">
+                    <attribute name="invisible">(is_owner)</attribute>
+                </xpath> -->
+                <!-- Gọi đến trường is_published rồi thêm clas d-none để ẩn -->
+                <xpath expr="//field[@name='is_published']" position="attributes">
+                    <!-- Thêm class d-none -->
+
+                    <attribute name="invisible">(is_owner)</attribute>
+                </xpath>
+                <xpath expr="//field[@name='is_published']" position="before">
+                    <button name="action_open_parent_product" type="object"
+                        string="Sản phẩm đầu chủ" class="btn-primary" invisible="is_owner" />
+                </xpath>
+                <xpath expr="//header" position="inside">
+                    <widget name="web_ribbon" title="Có sẵn" bg_color="bg-success" invisible="pr_status != 'sel_1'" />
+                    <widget
+                        name="web_ribbon" title="Đã đặt cọc" bg_color="text-bg-warning" invisible="pr_status != 'sel_2'"/>
+                    <widget
+                        name="web_ribbon" title="Đã bán" bg_color="text-bg-danger" invisible="pr_status != 'sel_3'"/>
+                    <button name="%(dup_product)d" string="Tạo sản phẩm đầu khách" type="action" class="oe_highlight" invisible="not is_owner"/>
+                </xpath>
+
+                <xpath expr="//div[@name='options']" position="inside">
+                    <span class="d-inline-block" invisible="not is_owner">
+                        <field id="is_owner" name="is_owner" string="Sản phẩm đầu chủ" />
+                        <label for="is_owner" />
+                    </span>
+                </xpath>
+
+                <xpath expr="//page[@name='general_information']" position="attributes">
+                    <attribute name="class">d-none</attribute>
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//page[@name='purchase']" position="attributes">
+                    <attribute name="class">d-none</attribute>
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//page[@name='inventory']" position="attributes">
+                    <attribute name="class">d-none</attribute>
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//page[@name='invoicing']" position="attributes">
+                    <attribute name="class">d-none</attribute>
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                
+                <xpath expr="//page[@name='sales']" position="attributes">
+                    <attribute name="class">d-none</attribute>
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//button[@name='toggle_preview']" position="attributes">
+                    <attribute name="invisible">is_owner</attribute>
+                </xpath>
+
+                <xpath expr="//page[@name='description_block']" position="attributes">
+                    <attribute name="invisible">is_owner</attribute>
+                </xpath>
+                
+
+                <notebook position="inside">
+                    <page name="re_general_information" string="Thông tin chung">
+                        <group>
+                            <group>
+                                <span class="o_form_label o_td_label" name="address_name">
+                                    <b>Address</b>
+                                </span>
+                                <div class="o_address_format">
+                                    <field name="street" placeholder="Đường"
+                                        class="o_address_street" />
+                                    <field name="alley" placeholder="Ngõ, số nhà"
+                                        class="o_address_street" />
+                                    <field name="district_id" placeholder="Quận huyện" />
+                                    <field name="ward_id" placeholder="Phường xã" />
+                                    <field name="state_id" class="o_address_state"
+                                        placeholder="City"
+                                        options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"
+                                        context="{'country_id': country_id, 'default_country_id': country_id}" />
+                                    <div name="partner_address_country"
+                                        class="d-flex justify-content-between">
+                                        <field name="country_id" placeholder="Country"
+                                            class="o_address_country"
+                                            options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" />
+                                    </div>
+                                </div>
+                            </group>
+                            <group>
+                                <field name="pr_status" />
+                                <field name="is_standard" />
+                            </group>
+                            <!-- <group invisible="is_owner">
+                                <field name="parent_product_id" widget="many2one" invisible="is_owner" />
+                            </group> -->
+                        </group>
+                        <group>
+                            <group string="Thông số chi tiết">
+                                <field name="product_type_id" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" >
+                                    <tree>
+                                        <field name="name" />
+                                        <field name="image" widget="image" />
+                                    </tree>
+                                </field>
+                                <field name="acreage" string="Diện tích trên sổ" />
+                                <field name="real_acreage" string="Diện tích thực tế" />
+                                <field name="facade" string="Mặt tiền (m)" />
+                                <field name="real_length" string="Chiều dài (m)" />
+
+                            </group>
+                            <group string="Cơ sở vật chất">
+                                <field name="floors" />
+                                <field name="nums_bedrooms" />
+                                <field name="nums_bath" />
+                                <field name="way_in" />
+                                <field name="balcony" />
+                                <field name="direction_id" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" >
+                                    <tree>
+                                        <field name="name" />
+                                        <field name="image" widget="image" />
+                                    </tree>
+                                </field>
+                            </group>
+                        </group>
+                    </page>
+                    <page name="re_sales" string="Bán">
+                        <group>
+                            <field name="offer_price" />
+                            <field name="close_price" />
+                            <field name="bonus_money_percent" string="% Hoa hồng" />
+                            <field name="bonus_money" string="Hoa hồng" />
+                        </group>
+                        <group string="Thông tin liên hệ">
+                            <group>
+                                <field name="sell_name" />
+                                <field name="sell_phone" />
+                                <field name="contract" />
+                            </group>
+                        </group>
+                        <group string="Tài khoản liên kết">
+                            <group>
+                                <field name="supp_fb" placeholder="Nhập đường dẫn" />
+
+                                <field name="supp_ms" placeholder="Nhập đường dẫn" />
+
+                                <field name="supp_zl" placeholder="Nhập đường dẫn" />
+                            </group>
+                            <group>
+                                <field name="supp_wa" placeholder="Nhập đường dẫn" />
+
+                                <field name="supp_vb" placeholder="Nhập đường dẫn" />
+                            </group>
+
+                        </group>
+                    </page>
+                    <page string="Mô tả">
+                        <!-- <span class="">
+                            <strong>Số seri sổ hồng: </strong>
+                        </span> -->
+
+
+                        <group string="Số Seri sổ hồng">
+                            <field colspan="2" name="h_o_c_seri" nolabel="1"
+                                placeholder="Nhập nội dung..." />
+                        </group>
+
+
+                        <group string="Thông tin chi tiết">
+                            <field colspan="2" name="description" nolabel="1"
+                                placeholder="Nhập nội dung..." />
+                        </group>
+                        <field name="product_template_image_ids" class="o_website_sale_image_list"
+                            context="{'default_name': name}" mode="kanban" add-label="Tải lên"
+                            nolabel="1">
+                            <kanban string="Product Images" default_order="sequence" offset="0"
+                                limit="4">
+                                <field name="id" />
+                                <field name="name" />
+                                <field name="image_1920" />
+                                <field name="sequence" widget="handle" />
+                                <templates>
+                                    <t t-name="kanban-box">
+                                        <div class="card oe_kanban_global_click p-0">
+                                            <div class="o_squared_image">
+                                                <img class="card-img-top"
+                                                    t-att-src="kanban_image('product.image', 'image_1920', record.id.raw_value)"
+                                                    t-att-alt="record.name.value" />
+                                            </div>
+                                            <div class="card-body p-0">
+                                                <h4 class="card-title p-2 m-0 bg-200">
+                                                    <small>
+                                                        <field name="name" />
+                                                    </small>
+                                                </h4>
+                                            </div>
+
+                                            <t
+                                                t-if="record.image_1920.raw_value.length &lt; 100*1000">
+                                                <t t-set="size_status" t-value="'text-bg-success'" />
+                                                <t t-set="message">Acceptable file size</t>
+                                            </t>
+
+                                            <t
+                                                t-elif="record.image_1920.raw_value.length &lt; 1000*1000">
+                                                <t t-set="size_status" t-value="'text-bg-warning'" />
+                                                <t t-set="message">Huge file size. The image should
+                                                    be optimized/reduced.</t>
+                                            </t>
+
+                                            <t t-else="1">
+                                                <t t-set="size_status" t-value="'text-bg-danger'" />
+                                                <t t-set="message">Optimization required! Reduce the
+                                                    image size or increase your compression
+                                                    settings.</t>
+                                            </t>
+                                            <span
+                                                t-attf-class="badge #{size_status} o_product_image_size"
+                                                t-esc="record.image_1920.value"
+                                                t-att-title="message" />
+                                        </div>
+                                    </t>
+                                </templates>
+                            </kanban>
+                        </field>
+                    </page>
+
+                    
+                    <page name="access_users" string="Danh sách liên hệ" invisible="not is_owner">
+                        <field name="child_partner_ids" mode="kanban" add-label="Thêm một đầu khách" options="{'no_create_edit': True}">
+                            <kanban offset="0" limit="4">
+                                <field name="id"/>
+                                <field name="color"/>
+                                <field name="name"/>
+                                <field name="title"/>
+                                <field name="type"/>
+                                <field name="email"/>
+                                <field name="parent_id"/>
+                                <field name="is_company"/>
+                                <field name="function"/>
+                                <field name="phone"/>
+                                <field name="street"/>
+                                <field name="street2"/>
+                                <field name="zip"/>
+                                <field name="city"/>
+                                <field name="country_id"/>
+                                <field name="mobile"/>
+                                <field name="state_id"/>
+                                <field name="image_128"/>
+                                <field name="avatar_128"/>
+                                <field name="lang"/>
+                                <field name="comment"/>
+                                <field name="display_name"/>
+                                <templates>
+                                    <t t-name="kanban-box">
+                                        <t t-set="color"
+                                            t-value="kanban_color(record.color.raw_value)" />
+                                        <div
+                                            t-att-class="color + (record.title.raw_value == 1 ? ' oe_kanban_color_alert' : '') + ' oe_kanban_global_click'">
+                                            <div class="o_kanban_image">
+                                                <img alt="Contact image"
+                                                    t-att-src="kanban_image('res.partner', 'avatar_128', record.id.raw_value)" />
+                                            </div>
+                                            <div class="oe_kanban_details">
+                                                <field name="name" />
+                                                <div t-if="record.function.raw_value">
+                                                    <field name="function" />
+                                                </div>
+                                                <div t-if="record.email.raw_value">
+                                                    <field name="email" widget="email" />
+                                                </div>
+                                                <div t-if="record.type.raw_value != 'contact'">
+                                                    <div>
+                                                        <field name="zip" />
+                                                        <t t-if="record.city"></t>
+                                                        <field name="city" />
+                                                    </div>
+                                                    <field t-if="record.state_id.raw_value"
+                                                        name="state_id" />
+                                                    <t t-if="record.country_id"></t>
+                                                    <field name="country_id" />
+                                                </div>
+                                                <div t-if="record.phone.raw_value">Phone: <t
+                                                        t-esc="record.phone.value" />
+                                                </div>
+                                                <div t-if="record.mobile.raw_value">Mobile: <t
+                                                        t-esc="record.mobile.value" />
+                                                </div>
+                                            </div>
+                                            <div class="delete-button text-end">
+                                                <a type="delete" name="delete_button"
+                                                    class="fa fa-trash" />
+                                            </div>
+                                        </div>
+                                    </t>
+                                </templates>
+                            </kanban>
+                            <form string="Contact / Address">
+                                <sheet>
+                                    <field name="type" required="1" widget="radio"
+                                        options="{'horizontal': true}" />
+                                    <field name="parent_id" invisible="1" />
+                                    <div class="text-muted oe_edit_only">
+                                        <p class="mb-0" invisible="type != 'contact'">
+                                            <span>Use this to organize the contact details of
+                                                employees of a given company (e.g. CEO, CFO, ...).</span>
+                                        </p>
+                                        <p class="mb-0" invisible="type != 'invoice'">
+                                            <span>Preferred address for all invoices. Selected by
+                                                default when you invoice an order that belongs to
+                                                this company.</span>
+                                        </p>
+                                        <p class="mb-0" invisible="type != 'delivery'">
+                                            <span>Preferred address for all deliveries. Selected by
+                                                default when you deliver an order that belongs to
+                                                this company.</span>
+                                        </p>
+                                        <p class="mb-0" invisible="type != 'other'">
+                                            <span>Other address for the company (e.g. subsidiary,
+                                                ...)</span>
+                                        </p>
+                                    </div>
+                                    <hr />
+                                    <group>
+                                        <group>
+                                            <field name="name" string="Contact Name"
+                                                required="type == 'contact'" />
+                                            <field name="title" options="{'no_open': True}"
+                                                placeholder="e.g. Mr." invisible="type != 'contact'" />
+                                            <field name="function" placeholder="e.g. Sales Director"
+                                                invisible="type != 'contact'" />
+                                            <label for="street" string="Address"
+                                                invisible="type == 'contact'" />
+                                            <div invisible="type == 'contact'">
+                                                <div class="o_address_format" name="div_address">
+                                                    <field name="street" placeholder="Street..."
+                                                        class="o_address_street" />
+                                                    <field name="street2" placeholder="Street 2..."
+                                                        class="o_address_street" />
+                                                    <field name="city" placeholder="City"
+                                                        class="o_address_city" />
+                                                    <field name="state_id" class="o_address_state"
+                                                        placeholder="State"
+                                                        options="{'no_open': True, 'no_quick_create': True}"
+                                                        context="{'country_id': country_id, 'default_country_id': country_id, 'zip': zip}" />
+                                                    <field name="zip" placeholder="ZIP"
+                                                        class="o_address_zip" />
+                                                    <field name="country_id" placeholder="Country"
+                                                        class="o_address_country"
+                                                        options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" />
+                                                </div>
+                                            </div>
+                                        </group>
+                                        <group>
+                                            <field name="email" widget="email" />
+                                            <field name="phone" widget="phone" />
+                                            <field name="mobile" widget="phone" />
+                                            <field name="company_id" invisible="1" />
+                                        </group>
+                                    </group>
+                                    <group>
+                                        <field name="comment" placeholder="Internal notes..."
+                                            nolabel="1" colspan="2" />
+                                    </group>
+                                    <field name="lang" invisible="True" />
+                                    <field name="user_id" invisible="True" />
+                                </sheet>
+                            </form>
+                        </field>
+                    </page>
+                    <page name="related_product" string="Danh sách bài đăng" invisible="not is_owner">
+                        <div class="container-fluid">
+                            <field name="child_product_ids" widget="one2many_lines" invisible="not is_owner">
+                                <tree>
+                                    <field name="name" />
+                                    <field name="create_uid" readonly="1" widget="many2one_avatar_user" string="Đầu khách" />
+                                    <field name="create_date" />
+                                    <button name="action_publish" string="Công khai" type="object" icon="fa-check"/>
+                                    <button name="unlink" string="Xóa" type="object" icon="fa-trash-o" confirm="Bạn có chắc chắn muốn xóa dữ liệu này?"/>
+                                    <button name="toggle_active" string="Archive" type="object" icon="fa-archive" confirm="Bạn có chắc chắn muốn lưu trữ dữ liệu này?"/>
+                                </tree>
+                            </field>
+                        </div>
+                    </page>
+
+                    <page name="sharing_list" string="Sharing"></page>
+                    
+                    <page name="opp_page" string="Biểu mẫu liên hệ" invisible="is_owner">
+                        <group name="" string="Liên hệ">
+                            <field name="activity_user_id" string="Người quản lý sản phẩm" />
+                            <field name="btn_options" string="Contact form type" widget="radio"
+                                default="PopUp" options="{'horizontal': true}" />
+                            <field name="form_model_name" widget="radio" string="Form action"
+                                default="crm.lead" options="{'horizontal': true}" />
+                        </group>
+                    </page>
+
+                </notebook>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+        <record id="custom_product_template_form_view_1" model="ir.ui.view">
+            <field name="name">custom.product.template.form.1</field>
+            <field name="model">product.template</field>
+            <!-- Sử dụng priority càng nhỏ để được ưu tiên cao hơn -->
+            <field name="priority">15</field>
+            <field name="arch" type="xml">
+                <form string="Custom Product Template Form 1">
+                    <!-- Định nghĩa các trường và bố cục -->
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="type"/>
+                            <field name="list_price"/>
+                            <field name="image_1920" widget="image"/>
+                            <!-- Các trường khác tùy chỉnh -->
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="custom_product_template_form_view_2" model="ir.ui.view">
+            <field name="name">custom.product.template.form.2</field>
+            <field name="model">product.template</field>
+            <field name="priority">15</field>
+            <field name="arch" type="xml">
+                <form string="Custom Product Template Form 2">
+                    <!-- Định nghĩa các trường và bố cục -->
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="type"/>
+                            <field name="list_price"/>
+                            <!-- Các trường khác tùy chỉnh -->
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>        
+    </data>
+</odoo>

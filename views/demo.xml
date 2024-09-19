@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_product_tree" model="ir.ui.view">
+        <field name="name">product_custom.tree</field>
+        <field name="model">product.type</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View Definition -->
+    <record id="view_custom_config_settings_form" model="ir.ui.view">
+        <field name="name">product_custom.form</field>
+        <field name="model">product.type</field>
+        <field name="priority" eval="20" />
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group string="Loại bất động sản">
+                        <field name="name" string="Tên loại" />
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action Definition -->
+    <record id="action_custom_config_settings" model="ir.actions.act_window">
+        <field name="name">Cài đặt chung</field>
+        <field name="res_model">product.type</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="view_id" ref="RealEstateModule_BDS.view_product_tree" />
+        <field name="view_ids"
+            eval="[(5, 0, 0), (0, 0, {'view_mode': 'tree', 'view_id': ref('RealEstateModule_BDS.view_product_tree')}),
+                                    (0, 0, {'view_mode': 'kanban', 'view_id': ref('RealEstateModule_BDS.view_product_kanban')}),
+                                    (0, 0, {'view_mode': 'form', 'view_id': ref('RealEstateModule_BDS.view_custom_config_settings_form')})]" />
+        <field name="target">main</field>
+    </record>
+
+    <!-- Menuitem Definition -->
+    <menuitem id="menu_product_template_3" name="Cài đặt chung" parent="menu_product_root"
+        action="action_custom_config_settings" sequence="10" />
+
+    <record id="view_product_kanban" model="ir.ui.view">
+        <field name="name">product_custom.kanban</field>
+        <field name="model">product.type</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="name" />
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_card">
+                            <strong>
+                                <field name="name" />
+                            </strong>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+</odoo>

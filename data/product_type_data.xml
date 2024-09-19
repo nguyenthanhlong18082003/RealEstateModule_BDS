@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="product_type_apartment" model="product.type">
+            <field name="name">Chung cư</field>
+        </record>
+        <record id="product_type_house" model="product.type">
+            <field name="name">Nhà đất</field>
+        </record>
+        <record id="product_type_land" model="product.type">
+            <field name="name">Đất nền nông nghiệp</field>
+        </record>
+    </data>
+</odoo>

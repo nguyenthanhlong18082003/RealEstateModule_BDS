@@ -1,0 +1,7 @@
+<odoo>
+    <record id="access_res_module_user" model="res.groups">
+        <field name="name">Access Real Estate User</field>
+        <field name="category_id" ref="base.module_category_tutorial"/>
+        <field name="comment">Users with this group will have access to custom sales menus.</field>
+    </record>
+</odoo>

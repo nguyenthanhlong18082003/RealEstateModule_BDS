@@ -1,0 +1,7 @@
+<odoo>
+    <record id="ward_1" model="res.country.ward">
+        <field name="name">Ward 1</field>
+        <field name="district_id" ref="district_1"/>
+    </record>
+    <!-- Thêm các phường/xã khác tương tự -->
+</odoo>

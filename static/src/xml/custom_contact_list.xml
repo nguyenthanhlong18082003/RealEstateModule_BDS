@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="real_estate.list_test" t-inherit="web.ListView" t-inherit-mode="primary" owl="1" >
+        <xpath expr="//button[@class='btn btn-primary o_list_button_add']" position="replace">
+            <button type="button" class="btn btn-primary o_list_button_add" data-hotkey="c" t-if="addButtonIsShown" t-on-click="addPartner" data-bounce-button="">
+                Add
+            </button>
+        </xpath>
+    </t>
+</templates>

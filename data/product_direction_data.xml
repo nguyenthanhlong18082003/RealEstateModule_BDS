@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="direction_north" model="product.direction">
+            <field name="name">North</field>
+        </record>
+        <record id="direction_south" model="product.direction">
+            <field name="name">South</field>
+        </record>
+        <record id="direction_east" model="product.direction">
+            <field name="name">East</field>
+        </record>
+        <record id="direction_west" model="product.direction">
+            <field name="name">West</field>
+        </record>
+        <record id="direction_north_east" model="product.direction">
+            <field name="name">North-East</field>
+        </record>
+        <record id="direction_north_west" model="product.direction">
+            <field name="name">North-West</field>
+        </record>
+        <record id="direction_south_east" model="product.direction">
+            <field name="name">South-East</field>
+        </record>
+        <record id="direction_south_west" model="product.direction">
+            <field name="name">South-West</field>
+        </record>
+    </data>
+</odoo>

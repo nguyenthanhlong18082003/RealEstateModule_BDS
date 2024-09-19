@@ -1,0 +1,48 @@
+<odoo>
+    <!-- filter loại bất động sản -->
+    <template id="shop_filter_inherit" inherit_id="website_sale.products">
+        <xpath expr="//*[contains(@class, 'products_header')]" position="after">
+            <div class="custom-area-filter">
+                <select id="city_filter" name="city_filter">
+                    <option value="">Tất cả khu vực</option>
+                    <option t-foreach="city_values" t-as="state" t-att-value="state.id"
+                        t-esc="state.name"
+                        t-att-selected="request.params.get('city_filter') == str(state.id)" />
+                </select>
+
+                <select id="category_filter" name="category_filter">
+                    <option value="">Tất cả loại lất động sản</option>
+                    <option t-foreach="category_values" t-as="type" t-att-value="type.id"
+                        t-esc="type.name"
+                        t-att-selected="request.params.get('category_filter') == str(type.id)" />
+                </select>
+                <select id="direction_filter" name="direction_filter">
+                    <option value="">Tất cả hướng bất động sản</option>
+                    <option t-foreach="direction_values" t-as="direction" t-att-value="direction.id"
+                        t-esc="direction.name"
+                        t-att-selected="request.params.get('direction_filter') == str(direction.id)" />
+                </select>
+
+                <select id="price_filter" name="price_filter">
+                    <option value="" t-att-selected="'price_filter' not in request.params">Chọn Giá</option>
+                    <option value="0-50000000"
+                        t-att-selected="request.params.get('price_filter') == '0-50000000'">Dưới
+                        50,000,000</option>
+                    <option value="50000000-500000000"
+                        t-att-selected="request.params.get('price_filter') == '50000000-500000000'">50,000,000
+                        - 500,000,000</option>
+                    <option value="500000000-1000000000"
+                        t-att-selected="request.params.get('price_filter') == '500000000-1000000000'">500,000,000
+                        - 1,000,000,000</option>
+                    <option value="1000000001"
+                        t-att-selected="request.params.get('price_filter') == '1000000001'">Trên
+                        1,000,000,000</option>
+                </select>
+
+                <button id="btn_submit" type="submit" class="btn btn-primary custom_btn">Lọc</button>
+            </div>
+        </xpath>
+
+    </template>
+
+</odoo>

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="custom_sent_friend_request_kanban_view" model="ir.ui.view">
+        <field name="name">sent.friend.request.kanban</field>
+        <field name="model">sent.friend.request</field>
+        <field name="priority" eval="20" />
+        <field name="arch" type="xml">
+            <kanban create="0" export_xlsx="false" import_xlsx="false">
+                <field name="sent_request"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click o_kanban_record_has_image_fill o_res_partner_kanban">
+                            <div class="o_kanban_image_fill_left d-none d-md-block" t-attf-style="background-image: url(#{kanban_image('res.partner', 'image_128', record.sent_request.raw_value)})" role="img"/>
+                            <div class="oe_kanban_details">
+                                <strong class="o_kanban_record_title">
+                                    <field name="sent_request"/>
+                                </strong>
+                                <div class="o_kanban_button">
+                                    <a type="object" class="fa fa-trash" name="cancel_request" context="{'sent_request_id': id}"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="custom_friend_request_form_view" model="ir.ui.view">
+        <field name="name">friend.request.kanban</field>
+        <field name="model">friend.request</field>
+        <field name="priority" eval="20" />
+        <field name="arch" type="xml">
+            <kanban create="0">
+                <field name="request_partner"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click o_kanban_record_has_image_fill o_res_partner_kanban">
+                            <div class="o_kanban_image_fill_left d-none d-md-block" t-attf-style="background-image: url(#{kanban_image('res.partner', 'image_128', record.request_partner.raw_value)})" role="img"/>
+                            <div class="oe_kanban_details position-relative">
+                                <strong class="o_kanban_record_title">
+                                    <field name="request_partner"/>
+                                </strong>
+                                <div class="o_kanban_record_bottom position-absolute bottom-0 end-0 me-2 mb-2">
+                                    <a type="object" class="btn btn-primary mx-1 fa fa-check" name="accept_request" context="{'request_id': id}"/>
+                                    <a type="object" class="btn btn-danger mx-1 fa fa-ban" name="reject_request" context="{'request_id': id}"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="custom_sent_partner_request_kanban_view" model="ir.ui.view">
+        <field name="name">sent.partner.request.kanban</field>
+        <field name="model">sent.partner.request</field>
+        <field name="priority" eval="20" />
+        <field name="arch" type="xml">
+            <kanban create="0" export_xlsx="false" import_xlsx="false">
+                <field name="sent_request"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click o_kanban_record_has_image_fill o_res_partner_kanban">
+                            <div class="o_kanban_image_fill_left d-none d-md-block" t-attf-style="background-image: url(#{kanban_image('res.partner', 'image_128', record.sent_request.raw_value)})" role="img"/>
+                            <div class="oe_kanban_details">
+                                <strong class="o_kanban_record_title">
+                                    <field name="sent_request"/>
+                                </strong>
+                                <div class="o_kanban_button">
+                                    <a type="object" class="fa fa-trash" name="cancel_request" context="{'sent_request_id': id}"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="custom_partner_request_form_view" model="ir.ui.view">
+        <field name="name">partner.request.kanban</field>
+        <field name="model">partner.request</field>
+        <field name="priority" eval="20" />
+        <field name="arch" type="xml">
+            <kanban create="0">
+                <field name="request_partner"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click o_kanban_record_has_image_fill o_res_partner_kanban">
+                            <div class="o_kanban_image_fill_left d-none d-md-block" t-attf-style="background-image: url(#{kanban_image('res.partner', 'image_128', record.request_partner.raw_value)})" role="img"/>
+                            <div class="oe_kanban_details position-relative">
+                                <strong class="o_kanban_record_title">
+                                    <field name="request_partner"/>
+                                </strong>
+                                <div class="o_kanban_record_bottom position-absolute bottom-0 end-0 me-2 mb-2">
+                                    <a type="object" class="btn btn-primary mx-1 fa fa-check" name="accept_request" context="{'request_id': id}"/>
+                                    <a type="object" class="btn btn-danger mx-1 fa fa-ban" name="reject_request" context="{'request_id': id}"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="custom_sent_team_request_kanban_view" model="ir.ui.view">
+        <field name="name">sent.team.request.kanban</field>
+        <field name="model">sent.team.request</field>
+        <field name="priority" eval="20" />
+        <field name="arch" type="xml">
+            <kanban create="0" export_xlsx="false" import_xlsx="false">
+                <field name="sent_request"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click o_kanban_record_has_image_fill o_res_partner_kanban">
+                            <div class="o_kanban_image_fill_left d-none d-md-block" t-attf-style="background-image: url(#{kanban_image('res.partner', 'image_128', record.sent_request.raw_value)})" role="img"/>
+                            <div class="oe_kanban_details">
+                                <strong class="o_kanban_record_title">
+                                    <field name="sent_request"/>
+                                </strong>
+                                <div class="o_kanban_button">
+                                    <a type="object" class="fa fa-trash" name="cancel_request" context="{'sent_request_id': id}"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="custom_team_request_form_view" model="ir.ui.view">
+        <field name="name">team.request.kanban</field>
+        <field name="model">team.request</field>
+        <field name="priority" eval="20" />
+        <field name="arch" type="xml">
+            <kanban create="0">
+                <field name="request_partner"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click o_kanban_record_has_image_fill o_res_partner_kanban">
+                            <div class="o_kanban_image_fill_left d-none d-md-block" t-attf-style="background-image: url(#{kanban_image('res.partner', 'image_128', record.request_partner.raw_value)})" role="img"/>
+                            <div class="oe_kanban_details position-relative">
+                                <strong class="o_kanban_record_title">
+                                    <field name="request_partner"/>
+                                </strong>
+                                <div class="o_kanban_record_bottom position-absolute bottom-0 end-0 me-2 mb-2">
+                                    <a type="object" class="btn btn-primary mx-1 fa fa-check" name="accept_request" context="{'request_id': id}"/>
+                                    <a type="object" class="btn btn-danger mx-1 fa fa-ban" name="reject_request" context="{'request_id': id}"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+</odoo>

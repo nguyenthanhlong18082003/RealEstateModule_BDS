@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_custom_friend_partner_tree_view" model="ir.ui.view">
+        <field name="name">custom.friend.partner.tree.view</field>
+        <field name="model">custom.friend.partner</field>
+        <field name="arch" type="xml">
+            <tree create="0" >
+                <field name="name"/>
+                <field name="email"/>
+                <field name="phone"/>
+                <field name="agency_id"/>
+                <field name="partner_id" invisible="1"/>
+                <button type="object" name="view_partner" class="btn btn-primary mx-1 my-2 fa fa-eye" context="{'partner_id': partner_id}"/>
+                <button type="object" name="add_partner" class="btn btn-secondary mx-1 my-2 fa fa-user-plus" context="{'partner_id': partner_id}"/>
+            </tree>
+        </field>
+    </record>
+    <record id="view_custom_friend_partner_search" model="ir.ui.view">
+        <field name="name">custom.friend.partner.search</field>
+        <field name="model">custom.friend.partner</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="email"/>
+                <field name="phone"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_custom_partner_tree_view" model="ir.ui.view">
+        <field name="name">custom.partner.tree.view</field>
+        <field name="model">custom.partner</field>
+        <field name="arch" type="xml">
+            <tree create="0" >
+                <field name="name"/>
+                <field name="email"/>
+                <field name="phone"/>
+                <field name="agency_id"/>
+                <field name="partner_id" invisible="1"/>
+                <button type="object" name="view_partner" class="btn btn-primary mx-1 my-2 fa fa-eye" context="{'partner_id': partner_id}"/>
+                <button type="object" name="add_partner" class="btn btn-secondary mx-1 my-2 fa fa-user-plus" context="{'partner_id': partner_id}"/>
+            </tree>
+        </field>
+    </record>
+    <record id="view_custom_friend_partner_search" model="ir.ui.view">
+        <field name="name">custom.partner.search</field>
+        <field name="model">custom.partner</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="email"/>
+                <field name="phone"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_custom_team_tree_view" model="ir.ui.view">
+        <field name="name">custom.team.tree.view</field>
+        <field name="model">custom.team</field>
+        <field name="arch" type="xml">
+            <tree create="0" >
+                <field name="name"/>
+                <field name="email"/>
+                <field name="phone"/>
+                <field name="agency_id"/>
+                <field name="partner_id" invisible="1"/>
+                <button type="object" name="view_partner" class="btn btn-primary mx-1 my-2 fa fa-eye" context="{'partner_id': partner_id}"/>
+                <button type="object" name="add_partner" class="btn btn-secondary mx-1 my-2 fa fa-user-plus" context="{'partner_id': partner_id}"/>
+            </tree>
+        </field>
+    </record>
+    <record id="view_custom_team_partner_search" model="ir.ui.view">
+        <field name="name">custom.team.search</field>
+        <field name="model">custom.team</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="email"/>
+                <field name="phone"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Custom lại Kanban view cho giao diện Contact -->
+    <record id="inherit_res_partner_kanban_view" model="ir.ui.view">
+        <field name="name">res.partner.kanban.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.res_partner_kanban_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//kanban" position="attributes">
+                <attribute name="js_class">kanban_test</attribute>
+            </xpath>
+            <kanban>
+                <field name="id"/>
+                <field name="name"/>
+                <field name="image_128"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click o_kanban_record_has_image_fill o_res_partner_kanban">
+                            <div class="o_kanban_image_fill_left d-none d-md-block" t-attf-style="background-image:url('#{kanban_image('res.partner', 'image_128', record.id.raw_value)}')">
+                                <img class="o_kanban_image_inner_pic" t-if="record.image_128.raw_value" t-att-src="kanban_image('res.partner', 'image_128', record.id.raw_value)"/>
+                            </div>
+                            <div class="oe_kanban_details postion-relative">
+                                <strong class="o_kanban_record_title">
+                                    <field name="name"/>
+                                </strong>
+                                <div class="o_kanban_button">
+                                    <a type="object" class="fa fa-trash" name="unlink_partner" context="{'remove_partner_id': id}"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Custom lại Tree view cho giao diện Contact -->
+    <record id="inherit_res_partner_list_view" model="ir.ui.view">
+        <field name="name">res.partner.tree.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="js_class">list_test</attribute>
+            </xpath>
+            <tree >
+                <field name="name"/>
+                <field name="phone"/>
+                <field name="email"/>
+                <button type="object" class="fa fa-trash" name="unlink_partner" context="{'remove_partner_id': id}" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_partner_form_inherit" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='website']" position="before">
+                <field name="cccd_nb" string="Số CMND/CCCD" on_change="1" />
+                <field name="link_fb" string="Facebook" on_change="1" />
+                <field name="link_zl" string="Zalo" on_change="1" />
+                <field name="link_ms" string="Messenger" on_change="1" />
+                <field name="link_vb" string="Viber" on_change="1" />
+                <field name="link_wa" string="WhatApp" on_change="1" />
+            </xpath>
+
+            <xpath expr="//notebook/page[@name='sales_purchases']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//notebook/page[@name='accounting']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//notebook/page[@name='accounting']" position="after">
+                <page name="friend_list" string="Friend List">
+                    <group>
+                        <field name="friend_partner_ids" options="{'no_create_edit': True, 'no_create': True}"/>
+                    </group>
+                </page>
+                <page name="co_partner_list" string="Co-Partner">
+                    <group>
+                        <field name="co_partner_ids" options="{'no_create_edit': True, 'no_create': True}"/>
+                    </group>
+                </page>
+                <page name="team_list" string="Team">
+                    <group>
+                        <field name="team_partner_ids" options="{'no_create_edit': True, 'no_create': True}"/>
+                    </group>
+                </page>
+            </xpath>
+
+            <xpath expr="//notebook/page[@name='accounting']" position="after">
+                <page name="emb_brokerage" string="Brokerage">
+                    <group name="group_top" string="Nhà đất bán">
+                        <group>
+                            <field name="sale_houses" widget="many2many_tags" options="{'no_create_edit': True, 'no_create': True}" />
+                            <field name="state_sale_house" widget="many2many_tags" options="{'no_create_edit': True, 'no_create': True}" />
+                        </group>
+                    </group>
+
+                    <group name="group_bot" string="Nhà đất cho thuê">
+                        <group>
+                            <field name="rent_house" widget="many2many_tags" options="{'no_create_edit': True, 'no_create': True}" />
+                            <field name="state_rent_house" widget="many2many_tags" options="{'no_create_edit': True, 'no_create': True}" />
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+
+            <xpath expr="//notebook/page[@name='emb_brokerage']" position="after">
+                <page string="Share List">
+                    <field name="add_user_ids" mode="kanban" add-label="Add a user">
+                        <kanban>
+                            <field name="name" />
+                            <field name="email" />
+                            <templates>
+                                <t t-name="kanban-box">
+                                    <div class="oe_kanban_global_click">
+                                        <div class="o_kanban_image">
+                                            <img alt="Contact image" t-att-src="kanban_image('res.partner', 'avatar_128', record.id.raw_value)" />
+                                        </div>
+                                        <div class="oe_kanban_details">
+                                            <strong>
+                                                <field name="name" />
+                                            </strong>
+                                            <div>
+                                                <field name="email" />
+
+                                            </div>
+                                        </div>
+                                        <div class="delete-button text-end">
+                                            <a type="delete" name="delete_button" class="fa fa-trash" />
+                                        </div>
+                                    </div>
+
+                                </t>
+                            </templates>
+                        </kanban>
+                    </field>
+                </page>
+            </xpath>
+
+        </field>
+    </record>
+
+    <record id="view_form_block_teamplate" model="ir.ui.view">
+        <field name="model">res.brokerage1</field>
+        <field name="arch" type="xml">
+            <form string="Block Template">
+                <group>
+                    <group>
+                        <field name="type_brokerage" string="Loại nhà bán" />
+                    </group>
+                    <group>
+                        <field name="display_name" string="Tên hiển thị" />
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+    <!-- <record id="view_res_brokerage1_search" model="ir.ui.view">
+        <field name="name">res.brokerage1.search</field>
+        <field name="model">res.brokerage1</field>
+        <field name="arch" type="xml">
+                <field name="type" string="Type"/>
+        </field>
+    </record> -->
+
+    <!-- <record id="view_res_partner_search" model="ir.ui.view">
+        <field name="name">res.partner.search.emb</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <search string="Search res.brokerage1">
+                <field name="type" string="Type"/>
+            </search>
+        </field>
+    </record> -->
+
+
+    <!-- <data >
+        <record id="sax" model="res.brokerage1">
+            <field name="type">Căn hộ</field>
+        </record>
+        <record id="sax2" model="res.brokerage1">
+            <field name="type">Nhà riêng</field>
+        </record>
+        <record id="sax3" model="res.brokerage1">
+            <field name="type">Đất</field>
+        </record>
+
+        <record id="sax4" model="res.brokerage2">
+            <field name="type">Căn hộ</field>
+        </record>
+        <record id="sax5" model="res.brokerage2">
+            <field name="type">Nhà riêng</field>
+        </record>
+        <record id="sax6" model="res.brokerage2">
+            <field name="type">Đất</field>
+        </record>
+
+        <record id="sax7" model="res.brokerage3">
+            <field name="type">Quận 1</field>
+        </record>
+        <record id="sax8" model="res.brokerage3">
+            <field name="type">Quận 2</field>
+        </record>
+        <record id="sax9" model="res.brokerage3">
+            <field name="type">Quận 3</field>
+        </record>
+
+        <record id="sax10" model="res.brokerage4">
+            <field name="type">Quận 1</field>
+        </record>
+        <record id="sax11" model="res.brokerage4">
+            <field name="type">Quận 2</field>
+        </record>
+        <record id="sax12" model="res.brokerage4">
+            <field name="type">Quận 3</field>
+        </record>
+    </data> -->
+
+</odoo>
