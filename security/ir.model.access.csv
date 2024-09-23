@@ -60,3 +60,9 @@ access_res_brokerage3,res.brokerage3 manager,model_res_brokerage3,base.group_sys
 
 access_res_brokerage4,res.brokerage4 user,model_res_brokerage4,base.group_user,1,1,1,1
 access_res_brokerage4,res.brokerage4 manager,model_res_brokerage4,base.group_system,1,1,1,1
+
+
+
+user_public_product_direction,User Public,model_product_direction,base.group_public,1,0,0,0
+user_public_product_type,User Public,model_product_type,base.group_public,1,0,0,0
+user_public_product_ribbon,User Public,model_product_ribbon,base.group_public,1,0,0,0

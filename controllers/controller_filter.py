@@ -22,8 +22,10 @@ class WebsiteSaleCustomFilter(WebsiteSale):
         
         # Tạo domain để lọc sản phẩm dựa trên thành phố
         domain = [('sale_ok', '=', True)]
+        # if city_filter:
+        #     domain.append(('state_id', '=', int(city_filter)))
         if city_filter:
-            domain.append(('state_id', '=', int(city_filter)))
+            domain.append(('province_id', '=', int(city_filter)))
         if category_filter:
             domain.append(('product_type_id', '=',int(category_filter)))
         if direction_filter:
@@ -40,7 +42,9 @@ class WebsiteSaleCustomFilter(WebsiteSale):
         products = request.env['product.template'].search(domain)
         ribbon_values = request.env['product.ribbon'].search([("id","=","5")] ,limit=1)
         _logger.info(f" ribbon_values + { ribbon_values}")
-        city_values = request.env['res.country.state'].search([])
+        # city_values = request.env['res.country.state'].search([])
+        # _logger.info(f" city_values + { city_values}")
+        city_values = request.env['vietnam.province'].search([])
         _logger.info(f" city_values + { city_values}")
         category_values = request.env['product.type'].search([])
         _logger.info(f" category_values + { category_values}")

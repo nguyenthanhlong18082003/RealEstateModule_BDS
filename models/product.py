@@ -75,8 +75,8 @@ class ProductTemplateInherit(models.Model):
     floors = fields.Integer(string="Số Tầng")
     interior = fields.Text(string="Nội thất")
 
-    district_id = fields.Many2one("res.country.district", string="District")
-    ward_id = fields.Many2one("res.country.ward", string="Ward")
+    # district_id = fields.Many2one("res.country.district", string="District")
+    # ward_id = fields.Many2one("res.country.ward", string="Ward")
     sell_name = fields.Char(string="Tên chủ nhà")
     sell_phone = fields.Char(string="Điện thoại chủ nhà")
     contract = fields.Many2one("res.partner", string="Hợp đồng")
@@ -107,14 +107,14 @@ class ProductTemplateInherit(models.Model):
         default="crm.lead",
     )
 
-    @api.onchange("state_id")
-    def _onchange_state_id(self):
-        self.district_id = False
-        self.ward_id = False
+    # @api.onchange("state_id")
+    # def _onchange_state_id(self):
+    #     self.district_id = False
+    #     self.ward_id = False
 
-    @api.onchange("district_id")
-    def _onchange_district_id(self):
-        self.ward_id = False
+    # @api.onchange("district_id")
+    # def _onchange_district_id(self):
+    #     self.ward_id = False
 
     @api.model
     def duplicate_product(self, record_id):
@@ -236,4 +236,5 @@ class ProductTemplateInherit(models.Model):
         except Exception as e:
             self._log_error(e)
             raise
+
 

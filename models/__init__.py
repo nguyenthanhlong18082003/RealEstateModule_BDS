@@ -12,3 +12,4 @@ from . import res_customer
 from . import res_agency
 from . import add_request
 from . import custom_partner
+from . import product_ribbon

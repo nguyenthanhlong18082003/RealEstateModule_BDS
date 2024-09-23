@@ -5,9 +5,9 @@
             <div class="custom-area-filter">
                 <select id="city_filter" name="city_filter">
                     <option value="">Tất cả khu vực</option>
-                    <option t-foreach="city_values" t-as="state" t-att-value="state.id"
-                        t-esc="state.name"
-                        t-att-selected="request.params.get('city_filter') == str(state.id)" />
+                    <option t-foreach="city_values" t-as="province" t-att-value="province.id"
+                        t-esc="province.name"
+                        t-att-selected="request.params.get('city_filter') == str(province.id)" />
                 </select>
 
                 <select id="category_filter" name="category_filter">

@@ -11,7 +11,7 @@
                             <span style="font-size: 14px;">
                                 <t t-raw="product.acreage"/>
                             </span>
-                        </div>
+                        </div> 
 
                         <div>
                         <img src="/RealEstateModule_BDS/static/description/3.png"

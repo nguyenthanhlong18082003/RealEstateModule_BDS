@@ -19,7 +19,7 @@
     # Module dựa trên các category nào
     # Khi hoạt động, category trong 'depends' phải được install
     ### rồi module này mới đc install
-    'depends': ['base', 'product', 'website_sale', 'crm', 'WebsiteTemplate_BDS'],
+    'depends': ['base', 'product', 'website_sale', 'crm', 'WebsiteTemplate_BDS','vietNamAddressAutofill'],
 
     # Module có được phép install hay không
     # Nếu bạn thắc mắc nếu tắt thì làm sao để install
