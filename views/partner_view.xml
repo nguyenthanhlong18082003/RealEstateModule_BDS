@@ -4,7 +4,7 @@
         <field name="name">custom.friend.partner.tree.view</field>
         <field name="model">custom.friend.partner</field>
         <field name="arch" type="xml">
-            <tree create="0" >
+            <tree create="0" edit="0">
                 <field name="name"/>
                 <field name="email"/>
                 <field name="phone"/>
@@ -31,7 +31,7 @@
         <field name="name">custom.partner.tree.view</field>
         <field name="model">custom.partner</field>
         <field name="arch" type="xml">
-            <tree create="0" >
+            <tree create="0" edit="0">
                 <field name="name"/>
                 <field name="email"/>
                 <field name="phone"/>
@@ -58,7 +58,7 @@
         <field name="name">custom.team.tree.view</field>
         <field name="model">custom.team</field>
         <field name="arch" type="xml">
-            <tree create="0" >
+            <tree create="0" edit="0">
                 <field name="name"/>
                 <field name="email"/>
                 <field name="phone"/>

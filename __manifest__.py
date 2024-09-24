@@ -53,8 +53,8 @@
     'post_init_hook': 'post_init_hook',
     'assets': {
         'web.assets_frontend': [
-            'RealEstateModule_BDS/static/src/snippets/s_website_form/000.js',
-            'RealEstateModule_BDS/static/src/snippets/s_website_form/option.js',
+            # 'RealEstateModule_BDS/static/src/snippets/s_website_form/000.js',
+            # 'RealEstateModule_BDS/static/src/snippets/s_website_form/option.js',
             'RealEstateModule_BDS/static/src/css/custom_css.css',
             'RealEstateModule_BDS/static/src/js/custom_filter.js'
             
